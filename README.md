@@ -40,7 +40,25 @@ def on_rx(control):
 ```
 
 ### Sending informaton to the RC
-The robot can send a command to the RC using
+The robot can send a command to the RC as a string. Currently the following types of commands are supported and are recognised by the first character:
+
+|starting character | command |
+|-------------------|---------|
+|I| display image in square LCD screen |
+|T| display status text
+|L| set left slider to value|
+|R| set right slider to value|
+|S| text-to-speech |
+
+Here are some example commands:
+|example | effect |
+|-----------------|---------|
+|Image('35790:00000:00000:00000:00000')| the Image is displayed in the little square LCD screen on the RC |
+|TThis is an example text| Displays 'This is an example text' in the status screen |
+|L50| Set left slider to the value of 50 |
+|SCan you hear this?| Says 'Can you hear this?'|
+
+Below is an example were the robot send periodically an image to the RC and where it reacts on button 7 and 8  by displaying a string in the status window.
 
 ```python
 t1=time.ticks_ms()
