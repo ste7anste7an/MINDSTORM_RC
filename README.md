@@ -8,8 +8,6 @@ The Android App is written using http://kodular.io. The graphics are designed by
 
 ## Protocol
 
-## SPIKE / MINDSTORMS python application
-
 The Android applications sends a structure containing all the controls from the RC to the robot.
 
 |control | type | values |
@@ -24,6 +22,7 @@ The Android applications sends a structure containing all the controls from the 
 |setting2|b | -100 to 100 |
 |buttons_bits| B | each button is encoded as a single bit| 
 
+## SPIKE / MINDSTORMS python application
 ### receiving controls
 On the robot the following code snippet is used for decoding the controls:
 
