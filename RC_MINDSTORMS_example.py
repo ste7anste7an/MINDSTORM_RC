@@ -242,13 +242,13 @@ buttons = [0]*8
 def on_rx(control):
     global l_stick_hor, l_stick_ver, r_stick_hor, r_stick_ver, l_trigger, r_trigger, setting1, setting2, buttons
     #print(control)
-    l_stick_hor, l_stick_ver, r_stick_hor, r_stick_ver, l_trigger, r_trigger, setting1, setting2, buttons_char = struct.unpack("bbbbBBiiB", control)
+    l_stick_hor, l_stick_ver, r_stick_hor, r_stick_ver, l_trigger, r_trigger, setting1, setting2, buttons_char = struct.unpack("bbbbBBhhB", control)
     for i in range(8):
          if buttons_char & 1 << i:
              buttons[i]=1
          else:
              buttons[i]=0
-    #print("rcv",l_stick_hor, l_stick_ver, r_stick_hor, r_stick_ver, l_trigger, r_trigger, setting1, setting2, buttons_char)
+    print("rcv",l_stick_hor, l_stick_ver, r_stick_hor, r_stick_ver, l_trigger, r_trigger, setting1, setting2, buttons_char)
     x=l_stick_hor
     y=l_stick_ver
     #print("x,y=",x,y)
@@ -292,17 +292,30 @@ while True:
             t1=time.ticks_ms()
             try:
                 receiver.send(repr(_CONNECT_IMAGES[n%15]))
-                receiver.send("L%d"%((n%15)*10))
+                #receiver.send("L%d"%((n%19)*40-360))
                 n+=1
             except:
-                print("Error sending data")
+                # print("Error sending data")
+                pass
         # Beep on any button press
         if buttons[7]:
             buttons[7]=0
-            receiver.send("TDit is een status regel knop 8")
+            receiver.send("TButton 8 pressed!")
         if buttons[6]:
             buttons[6]=0
-            receiver.send("TDit is een status regel knop 7")
+            receiver.send("TButton 7 pressed!")
+        if buttons[5]:
+            buttons[5]=0
+            # use text-to-speech to pronouce the following
+            receiver.send("SCan you hear this?")
+        if buttons[3]:
+            buttons[3]=0
+            # show left trigger value in status bar
+            receiver.send("TLT=%d,S1=%d"%(l_trigger,setting1))
+        if buttons[2]:
+            buttons[2]=0
+            # show rightt trigger value in status bar
+            receiver.send("TRT=%d,S2=%d"%(r_trigger,setting2))
     #sound.beep(880,500)
         if l_trigger > 10:
             pass
