@@ -4,6 +4,9 @@
 
 The Android App is written using http://kodular.io. The graphics are designed by Anton from http://antonsmindstorms.com.
 
+<p align="center">
+  <img src="images/MINDSTORM_RC.jpg" width="350" title="MINDSTORMS RC">
+</p>
 
 ## Protocol
 
